@@ -20,6 +20,21 @@ class Network(object):
 		print self.weights
 
 
+	def feedforward(self, a):
+		for bias, weight in zip(self.biases, self.weights):
+			a = sigmoid(np.dot(w, a)+b)
+		return a
+
+
+# generate sigmoid
+def sigmoid(z):
+	'''
+	 when the input z is a vector or Numpy array, 
+	 Numpy automatically applies the function sigmoid elementwise, that is, in vectorized form.
+	'''
+	return 1.0/(1.0+np.exp(-z))
+
+
 
 if __name__ == "__main__":
 	sizes = [4,3,2]
