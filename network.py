@@ -23,6 +23,8 @@ class Network(object):
 		self.biases = [np.random.randn(y,1) for y in sizes[1:]] 
 
 		# weights[0]: weights connecting first layer and second layer, 
+		# weights[0][0]: weights connecting first layer to first node of second layer
+		# weights[0][0][0]: weight connecting first node of first layer to first node of second layer
 		# np.random.randn(y,x) generates matrix of y rows(number of nodes in back layer) x columns(number of nodes in front layer)
 		'''
 		[
@@ -93,7 +95,15 @@ class Network(object):
 		self.weights = [w-(eta/len(mini_batch))*nw for w, nw in zip(self.weights, nabla_w)]
 		self.biases = [b-(eta/len(mini_batch))*nb  for b, nb in zip(self.biases, nabla_b)]
 
-	
+	def backprop(self, x, y):
+		"""
+		return a tuple (nabla_b, nabla_w). "nabla_b" and
+        "nabla_w" are layer-by-layer lists of numpy arrays, similar
+        to "self.biases" and "self.weights".
+		"""
+		nabla_b = [np.zeros(b.shape) for b in self.biases]
+		nabla_w = [np.zeros(w.shape) for w in self.weights]
+
 
 # generate sigmoid
 def sigmoid(z):
